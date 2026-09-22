@@ -2,6 +2,7 @@ package com.commerce.ecom.entities;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -12,5 +13,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String name;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant moment;
+
+    private OrderStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User client;
 }
